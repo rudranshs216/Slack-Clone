@@ -26,6 +26,8 @@ const Chat = () => {
 
 
   return <ChatContainer>
+  {roomDetails && roomMessage && (
+      <>
       <Header>
           <HeaderLeft>
              <h4><strong>#{roomDetails?.data().name}</strong></h4> 
@@ -51,11 +53,14 @@ const Chat = () => {
                  />
              )
          })}
-         
+         <Chatbottom ref={chatRef} />
        </ChatMesssage>
 
-      <ChatInput channelName={roomDetails?.data().name} channelId={roomId} />
-
+      <ChatInput chatRef={chatRef} channelName={roomDetails?.data().name} channelId={roomId} />
+   
+      </>
+  )}
+      
   </ChatContainer>;
 };
 
@@ -71,7 +76,7 @@ const ChatContainer = styled.div`
 `;
 
 const Chatbottom = styled.div`
-padding-bottom: 200px;
+padding-bottom: 150px;
 `;
 
 const Header = styled.div`
@@ -109,6 +114,5 @@ font-size: 14px;
 `;
 
 const ChatMesssage = styled.div`
- overflow-y: scroll  !important;
- padding-bottom: 200px;
+ 
 `;

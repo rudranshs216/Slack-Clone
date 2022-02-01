@@ -1,12 +1,15 @@
 import { Add, Apps, BookmarkBorder, Create, Drafts, ExpandLess, ExpandMore, FiberManualRecord, FileCopy, Inbox, Message, PeopleAlt, Tag } from '@mui/icons-material';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import styled from 'styled-components';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import SidebarOption from './SidebarOption';
 
 function Sidebar() {
     const [channels,loading,error] = useCollection(db.collection("rooms"));
+    const [user] = useAuthState(auth);
+
 
 
   return <SidebarContainer>
@@ -15,7 +18,7 @@ function Sidebar() {
       <h2>Rudra HQ</h2>
       <h3>
       <FiberManualRecord />
-      Rudransh Sharma
+      {user?.displayName}
       </h3>
   
   </SidebarHeaderInfo>
